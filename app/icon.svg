@@ -1,14 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="7" fill="#0f0f0f" />
-  <text
-    x="13.5"
-    y="16.5"
-    text-anchor="middle"
-    dominant-baseline="central"
-    font-family="ui-monospace, 'SFMono-Regular', 'DejaVu Sans Mono', Menlo, monospace"
-    font-size="20"
-    font-weight="700"
+  <!-- "S" from Space Mono Bold, outlined so it never depends on installed fonts -->
+  <path
+    transform="translate(7.44 23.5) scale(0.02 -0.02)"
     fill="#ededed"
-  >S</text>
-  <circle cx="24" cy="21.5" r="2.6" fill="#2f6fed" />
+    d="M316 -14Q224 -14 161.5 19.5Q99 53 67.5 111.0Q36 169 36 242V272H168V248Q168 185 205.0 147.5Q242 110 318 110Q378 110 407.0 136.0Q436 162 436 198Q436 221 425.0 240.5Q414 260 385.0 274.5Q356 289 302 298Q232 310 177.5 333.0Q123 356 91.5 397.5Q60 439 60 508V514Q60 571 90.0 616.5Q120 662 174.5 688.0Q229 714 302 714Q385 714 442.0 684.0Q499 654 528.5 604.5Q558 555 558 498V462H426V486Q426 528 393.5 559.0Q361 590 302 590Q253 590 223.5 569.5Q194 549 194 514Q194 478 225.5 456.0Q257 434 344 418Q454 399 512.0 351.5Q570 304 570 212V200Q570 103 502.0 44.5Q434 -14 316 -14Z"
+  />
+  <circle cx="23.5" cy="21" r="2.6" fill="#2f6fed" />
 </svg>
