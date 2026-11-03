@@ -49,8 +49,11 @@ export interface Dictionary {
     projects: string
     experience: string
     contact: string
+    home: string
     themeToggle: string
     openMenu: string
+    closeMenu: string
+    menuTitle: string
   }
   profile: { role: string; location: string; intro: string }
   hero: { greeting: string; ctaContact: string; ctaWork: string }

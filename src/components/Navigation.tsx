@@ -1,11 +1,18 @@
 'use client'
 
-import { useCallback, useState, useSyncExternalStore } from 'react'
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Moon, Sun, Menu, X, ArrowRight } from 'lucide-react'
-import { PROFILE, localePath, type Locale, type Dictionary } from '@/lib/i18n'
+import { Moon, Sun, Menu, X, ArrowRight, ArrowUpRight, Mail } from 'lucide-react'
+import { GithubIcon, LinkedinIcon } from '@/components/icons'
+import {
+  PROFILE,
+  SOCIAL_LINKS,
+  localePath,
+  type Locale,
+  type Dictionary,
+} from '@/lib/i18n'
 
 const THEME_EVENT = 'themechange'
 
@@ -115,6 +122,33 @@ export default function Navigation({
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 
+  // Close the menu whenever the route changes (link tap, language switch, back).
+  const [menuPath, setMenuPath] = useState(pathname)
+  if (menuPath !== pathname) {
+    setMenuPath(pathname)
+    setIsOpen(false)
+  }
+
+  // While open: lock page scroll, close on Escape, close if resized to desktop.
+  useEffect(() => {
+    if (!isOpen) return
+    const root = document.documentElement
+    const prevOverflow = root.style.overflow
+    root.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
+    const desktop = window.matchMedia('(min-width: 768px)')
+    const onResize = () => desktop.matches && setIsOpen(false)
+    window.addEventListener('keydown', onKey)
+    desktop.addEventListener('change', onResize)
+    return () => {
+      root.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKey)
+      desktop.removeEventListener('change', onResize)
+    }
+  }, [isOpen])
+
   const toggleDarkMode = useCallback(() => {
     applyTheme(!getSnapshot())
   }, [])
@@ -166,32 +200,107 @@ export default function Navigation({
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 rounded-lg text-fg hover:bg-elevated transition-colors"
-            aria-label={nav.openMenu}
+            aria-label={isOpen ? nav.closeMenu : nav.openMenu}
             aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden border-t border-line bg-bg">
-          <ul className="container-main py-4 flex flex-col gap-4">
-            {items.map(item => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={linkClass(item.href)}
-                  aria-current={pathname === item.href ? 'page' : undefined}
-                  onClick={() => setIsOpen(false)}
+      {/* Full-height panel under the bar. Always mounted so it can fade;
+          `inert` keeps it out of the tab order and screen readers when closed. */}
+      <div
+        id="mobile-menu"
+        data-open={isOpen || undefined}
+        inert={!isOpen}
+        className="mobile-menu md:hidden absolute inset-x-0 top-full h-[calc(100dvh-100%)] overflow-y-auto border-t border-line bg-bg"
+      >
+        <div className="container-main flex min-h-full flex-col py-8">
+          <p
+            className="mobile-menu-item mb-4 font-mono text-xs text-muted"
+            style={{ '--i': 0 } as React.CSSProperties}
+          >
+            {'// '}
+            {nav.menuTitle}
+          </p>
+
+          <ul className="border-t border-line">
+            {[{ href: localePath(lang, 'home'), label: nav.home }, ...items].map((item, i) => {
+              const active = pathname === item.href
+              return (
+                <li
+                  key={item.href}
+                  className="mobile-menu-item border-b border-line"
+                  style={{ '--i': i + 1 } as React.CSSProperties}
                 >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+                  <Link
+                    href={item.href}
+                    aria-current={active ? 'page' : undefined}
+                    onClick={() => setIsOpen(false)}
+                    className="group flex items-baseline gap-4 py-4"
+                  >
+                    <span
+                      className={`w-6 font-mono text-xs ${active ? 'text-primary-500' : 'text-muted'}`}
+                    >
+                      {String(i).padStart(2, '0')}
+                    </span>
+                    <span className="font-mono text-3xl font-bold tracking-tight text-fg">
+                      {item.label.toLowerCase()}
+                      <span
+                        aria-hidden="true"
+                        className={
+                          active
+                            ? 'text-primary-500'
+                            : 'text-transparent transition-colors group-hover:text-primary-500'
+                        }
+                      >
+                        .
+                      </span>
+                    </span>
+                    <ArrowRight
+                      size={18}
+                      className="ml-auto self-center text-muted transition-transform group-hover:translate-x-1"
+                    />
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
+
+          <div
+            className="mobile-menu-item mt-auto pt-10"
+            style={{ '--i': items.length + 2 } as React.CSSProperties}
+          >
+            <a
+              href={`mailto:${SOCIAL_LINKS.email}`}
+              className="flex items-center gap-2 text-sm text-muted hover:text-primary-500 transition-colors break-all"
+            >
+              <Mail size={16} className="shrink-0" />
+              {PROFILE.email}
+            </a>
+            <div className="mt-4 flex gap-6 text-sm">
+              <a
+                href={SOCIAL_LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-muted hover:text-primary-500 transition-colors"
+              >
+                <GithubIcon size={16} /> GitHub <ArrowUpRight size={14} />
+              </a>
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-muted hover:text-primary-500 transition-colors"
+              >
+                <LinkedinIcon size={16} /> LinkedIn <ArrowUpRight size={14} />
+              </a>
+            </div>
+          </div>
         </div>
-      )}
+      </div>
     </nav>
   )
 }

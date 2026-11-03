@@ -18,8 +18,11 @@ const en: Dictionary = {
     projects: 'Projects',
     experience: 'Experience',
     contact: 'Contact',
+    home: 'Home',
     themeToggle: 'Toggle light/dark theme',
     openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    menuTitle: 'navigation',
   },
 
   profile: {
