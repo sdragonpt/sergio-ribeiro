@@ -54,6 +54,8 @@ const en: Dictionary = {
       "I'm Sérgio, with a bachelor's in Communication and Multimedia and currently a master's student in Multimedia Technologies at UTAD. I like to keep experimenting with new tools and taking ideas from concept to product.",
       'My background in communication and multimedia means I think about the person using what I build first, and the code second. I care about digital experiences that are fast, clear and good-looking.',
     ],
+    photoAlt: 'Portrait of Sérgio Ribeiro',
+    photoCaption: '// Vila Real, Portugal',
     skillsTitle: 'Skills',
     skillsNote: 'The technologies I work with, grouped by area. Highlighted ones are the tools I reach for most.',
     educationTitle: 'Education',

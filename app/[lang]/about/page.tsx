@@ -1,7 +1,13 @@
+import { existsSync } from 'node:fs'
+import path from 'node:path'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import SkillsGrid from '@/components/SkillsGrid'
 import { getDictionary, isLocale } from '@/lib/i18n'
+
+// Drop the photo at this path; until it exists the slot only shows in dev.
+const PORTRAIT_SRC = '/images/sergio.jpg'
 
 export async function generateMetadata({
   params,
@@ -22,16 +28,45 @@ export default async function AboutPage({
   const { lang } = await params
   if (!isLocale(lang)) notFound()
   const dict = await getDictionary(lang)
+  const hasPortrait = existsSync(path.join(process.cwd(), 'public', PORTRAIT_SRC))
+  const showPortrait = hasPortrait || process.env.NODE_ENV !== 'production'
 
   return (
     <div className="section-spacing">
       <div className="container-main">
-        <h1 className="mb-8">{dict.about.title}</h1>
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_17rem] md:gap-16 md:items-start mb-16">
+          <div>
+            <h1 className="mb-8">{dict.about.title}</h1>
+            <div className="max-w-2xl space-y-4 text-muted leading-relaxed">
+              {dict.about.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </div>
 
-        <div className="max-w-2xl space-y-4 text-muted leading-relaxed mb-16">
-          {dict.about.paragraphs.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+          {showPortrait && (
+            <figure className="order-first md:order-none w-full max-w-60 md:max-w-none">
+              <div className="relative aspect-[4/5] bg-surface">
+                {hasPortrait ? (
+                  <Image
+                    src={PORTRAIT_SRC}
+                    alt={dict.about.photoAlt}
+                    fill
+                    preload
+                    sizes="(min-width: 768px) 17rem, 15rem"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 grid place-items-center border border-dashed border-line p-4 text-center font-mono text-xs text-muted">
+                    public{PORTRAIT_SRC}
+                  </div>
+                )}
+              </div>
+              <figcaption className="mt-3 font-mono text-xs text-muted">
+                {dict.about.photoCaption}
+              </figcaption>
+            </figure>
+          )}
         </div>
 
         <h2 className="section-title">{dict.about.skillsTitle}</h2>

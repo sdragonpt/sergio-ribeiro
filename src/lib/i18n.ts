@@ -68,6 +68,8 @@ export interface Dictionary {
   about: {
     title: string
     paragraphs: string[]
+    photoAlt: string
+    photoCaption: string
     skillsTitle: string
     skillsNote: string
     educationTitle: string
