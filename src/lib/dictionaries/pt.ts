@@ -100,7 +100,7 @@ const pt: Dictionary = {
     {
       title: 'Licenciatura em Comunicação e Multimédia',
       place: 'Universidade de Trás-os-Montes e Alto Douro',
-      period: '2020 – 2024',
+      period: '2021 – 2024',
       description:
         'Base sólida em média digital, design e estratégias de comunicação, com componente prática em tecnologias web.',
     },

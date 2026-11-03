@@ -100,7 +100,7 @@ const en: Dictionary = {
     {
       title: "Bachelor's in Communication and Multimedia",
       place: 'University of Trás-os-Montes and Alto Douro (UTAD)',
-      period: '2020 – 2024',
+      period: '2021 – 2024',
       description:
         'A solid foundation in digital media, design and communication strategy, with hands-on work in web technologies.',
     },
