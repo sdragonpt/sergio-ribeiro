@@ -19,10 +19,16 @@ function pickLocale(request: NextRequest): string {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  const hasLocale = LOCALES.some(
+  const current = LOCALES.find(
     locale => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   )
-  if (hasLocale) return
+  if (current) {
+    // not-found.tsx gets no params, so hand it the locale and path this way.
+    const headers = new Headers(request.headers)
+    headers.set('x-locale', current)
+    headers.set('x-pathname', pathname)
+    return NextResponse.next({ request: { headers } })
+  }
 
   const locale = pickLocale(request)
   request.nextUrl.pathname = `/${locale}${pathname === '/' ? '' : pathname}`

@@ -241,6 +241,16 @@ const pt: Dictionary = {
     mailSomeone: 'alguém',
   },
 
+  notFound: {
+    title: 'Página não encontrada',
+    eyebrow: 'Erro 404',
+    heading: 'página não encontrada',
+    text: 'O endereço pode ter mudado ou nunca ter existido. Volta ao início ou espreita os meus projetos.',
+    pathNote: 'não existe',
+    ctaHome: 'Voltar ao início',
+    ctaProjects: 'Ver projetos',
+  },
+
   footer: {
     navTitle: 'Navegação',
     contactTitle: 'Contacto',

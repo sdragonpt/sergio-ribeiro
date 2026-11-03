@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, MapPin } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import ContactForm from '@/components/ContactForm'
 import { PROFILE, SOCIAL_LINKS, getDictionary, isLocale } from '@/lib/i18n'
@@ -47,15 +47,6 @@ export default async function ContactPage({
                   className="text-muted hover:text-primary-500 transition-colors break-all"
                 >
                   {PROFILE.email}
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone size={18} className="text-primary-500 shrink-0" />
-                <a
-                  href={`tel:${PROFILE.phone.replace(/\s/g, '')}`}
-                  className="text-muted hover:text-primary-500 transition-colors"
-                >
-                  {PROFILE.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">

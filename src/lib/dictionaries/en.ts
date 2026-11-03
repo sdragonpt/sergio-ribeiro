@@ -240,6 +240,16 @@ const en: Dictionary = {
     mailSomeone: 'someone',
   },
 
+  notFound: {
+    title: 'Page not found',
+    eyebrow: 'Error 404',
+    heading: 'page not found',
+    text: 'The address may have moved or never existed. Head back home or take a look at my projects.',
+    pathNote: 'does not exist',
+    ctaHome: 'Back to home',
+    ctaProjects: 'See projects',
+  },
+
   footer: {
     navTitle: 'Navigation',
     contactTitle: 'Contact',

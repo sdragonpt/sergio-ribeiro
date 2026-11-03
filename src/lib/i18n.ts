@@ -107,6 +107,15 @@ export interface Dictionary {
     mailSubjectFallback: string
     mailSomeone: string
   }
+  notFound: {
+    title: string
+    eyebrow: string
+    heading: string
+    text: string
+    pathNote: string
+    ctaHome: string
+    ctaProjects: string
+  }
   footer: { navTitle: string; contactTitle: string; rights: string }
 }
 
@@ -126,7 +135,6 @@ export const PROFILE = {
   name: 'Sérgio Ribeiro',
   firstName: 'Sérgio',
   email: 'sergionunoribeiro@gmail.com',
-  phone: '[removido]',
 }
 
 export const SITE_URL = 'https://sergioribeiro.netlify.app'
