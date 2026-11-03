@@ -168,9 +168,21 @@ const en: Dictionary = {
       period: 'December 2024 – Present',
       status: 'ongoing',
       categories: ['Mobile', 'Web Dev'],
-      tags: ['React Native', 'React.js', 'Firebase'],
+      tags: ['React.js', 'Capacitor', 'Firebase'],
       featured: true,
-      links: { live: 'https://nonato-service.web.app/start' },
+      links: { live: 'https://app.nonatoservice.pt' },
+    },
+    {
+      id: 'nonato-website',
+      title: 'Nonato Service website',
+      description:
+        'The new public website for Nonato Service: fast, static and search-friendly, built with Astro and Tailwind CSS.',
+      period: 'September 2026 – October 2026',
+      status: 'completed',
+      categories: ['Web Dev'],
+      tags: ['Astro', 'Tailwind CSS', 'Firebase Hosting'],
+      featured: true,
+      links: { live: 'https://nonatoservice.pt/' },
     },
     {
       id: 'crewards-v2',
@@ -181,7 +193,6 @@ const en: Dictionary = {
       status: 'completed',
       categories: ['Web Dev'],
       tags: ['Vue.js', 'Tailwind CSS', 'API integration'],
-      featured: true,
       links: { live: 'https://crewards-v2.netlify.app/' },
     },
     {
