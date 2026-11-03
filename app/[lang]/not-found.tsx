@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { headers } from 'next/headers'
+import CodeBackdrop from '@/components/CodeBackdrop'
 import { DEFAULT_LOCALE, PROFILE, getDictionary, isLocale, localePath } from '@/lib/i18n'
 
 // not-found receives no params; proxy.ts forwards the locale and path as headers.
@@ -11,9 +12,10 @@ export default async function NotFound() {
   const t = (await getDictionary(lang)).notFound
 
   return (
-    <section className="section-spacing">
+    <section className="section-spacing relative overflow-hidden">
       <title>{`${t.title} · ${PROFILE.name}`}</title>
-      <div className="container-main">
+      <CodeBackdrop />
+      <div className="container-main relative">
         <div className="mb-4">
           <span className="text-sm font-mono text-primary-500 uppercase tracking-widest">
             <span className="text-muted">&gt;</span> {t.eyebrow}

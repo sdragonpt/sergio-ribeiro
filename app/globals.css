@@ -300,6 +300,139 @@
   }
 }
 
+/* ---- Code backdrop: floating glyphs, drifting lines, glitches -------- */
+.code-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+}
+.code-token {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  font-size: var(--s);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.2;
+}
+.code-accent {
+  color: var(--color-primary-500);
+  opacity: 0.45;
+}
+.code-drift {
+  position: absolute;
+  left: 0;
+  top: var(--y);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0.12;
+}
+/* Below lg the text fills the width, so pull the few glyphs to the edge. */
+@media (max-width: 1023px) {
+  .code-token {
+    left: auto;
+    right: 4%;
+    opacity: 0.14;
+  }
+  .code-accent {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .code-float {
+    animation: code-float var(--dur) ease-in-out var(--delay) infinite;
+  }
+  .code-drift {
+    animation: code-drift var(--dur) linear infinite;
+  }
+  .code-drift-reverse {
+    animation-direction: reverse;
+  }
+  .code-glitch {
+    animation: code-glitch var(--dur) steps(1, end) var(--delay) infinite;
+  }
+  .code-glitch::before,
+  .code-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+  .code-glitch::before {
+    color: var(--color-primary-400);
+    animation: code-glitch-slice var(--dur) steps(1, end) var(--delay) infinite;
+  }
+  .code-glitch::after {
+    color: var(--color-fg);
+    animation: code-glitch-slice var(--dur) steps(1, end) calc(var(--delay) - 0.08s) infinite reverse;
+  }
+}
+
+@keyframes code-float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(6px, -16px) rotate(5deg);
+  }
+}
+@keyframes code-drift {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+/* Quiet most of the cycle, then a short burst near the end. */
+@keyframes code-glitch {
+  0%,
+  88%,
+  100% {
+    transform: none;
+  }
+  90% {
+    transform: translateX(-2px) skewX(12deg);
+  }
+  93% {
+    transform: translateX(3px) skewX(-8deg);
+  }
+  96% {
+    transform: translateX(-1px);
+  }
+}
+@keyframes code-glitch-slice {
+  0%,
+  88%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+    transform: none;
+  }
+  90% {
+    clip-path: inset(15% 0 50% 0);
+    transform: translate(-4px, 1px);
+  }
+  92% {
+    clip-path: inset(60% 0 8% 0);
+    transform: translate(4px, -1px);
+  }
+  94% {
+    clip-path: inset(35% 0 35% 0);
+    transform: translate(-3px, 0);
+  }
+  97% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(2px, 1px);
+  }
+}
+
 /* ---- Mobile menu: panel fades in, rows rise in one after another ---- */
 .mobile-menu {
   opacity: 0;

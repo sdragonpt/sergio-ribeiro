@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowRight, Mail } from 'lucide-react'
+import CodeBackdrop from '@/components/CodeBackdrop'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
 import Timeline from '@/components/Timeline'
@@ -23,8 +24,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <>
       {/* Hero */}
-      <section className="section-spacing">
-        <div className="container-main">
+      <section className="section-spacing relative overflow-hidden">
+        <CodeBackdrop />
+        <div className="container-main relative">
           <div className="mb-4">
             <span className="text-sm font-mono text-primary-500 uppercase tracking-widest">
               <span className="text-muted">&gt;</span> {dict.profile.role}
