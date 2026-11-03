@@ -25,7 +25,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     <>
       {/* Hero */}
       <section className="section-spacing relative overflow-hidden">
-        <CodeBackdrop />
+        <CodeBackdrop preset="hero" />
         <div className="container-main relative">
           <div className="mb-4">
             <span className="text-sm font-mono text-primary-500 uppercase tracking-widest">
@@ -83,8 +83,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       {/* Featured projects */}
-      <section className="section-spacing bg-surface border-y border-line">
-        <div className="container-main">
+      <section className="section-spacing relative overflow-hidden bg-surface border-y border-line">
+        <CodeBackdrop preset="edges" seed={1} count={8} />
+        <div className="container-main relative">
           <h2 className="section-title">{dict.home.featuredTitle}</h2>
           <p className="text-muted max-w-xl mb-12">{dict.home.featuredSub}</p>
 
@@ -105,8 +106,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       {/* Recent experience */}
-      <section className="section-spacing">
-        <div className="container-main">
+      <section className="section-spacing relative overflow-hidden">
+        <CodeBackdrop preset="edges" seed={2} count={6} />
+        <div className="container-main relative">
           <h2 className="section-title">{dict.home.experienceTitle}</h2>
           <p className="text-muted max-w-xl mb-12">{dict.home.experienceSub}</p>
 
@@ -123,8 +125,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       {/* CTA */}
-      <section className="section-spacing bg-surface border-t border-line">
-        <div className="container-main">
+      <section className="section-spacing relative overflow-hidden bg-surface border-t border-line">
+        <CodeBackdrop preset="cta" seed={3} />
+        <div className="container-main relative">
           <h2 className="section-title">{dict.home.ctaTitle}</h2>
           <p className="text-muted max-w-xl mb-8">{dict.home.ctaText}</p>
           <Link href={localePath(lang, 'contact')} className="btn">

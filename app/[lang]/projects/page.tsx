@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import CodeBackdrop from '@/components/CodeBackdrop'
 import ProjectsExplorer from '@/components/ProjectsExplorer'
 import { getDictionary, isLocale } from '@/lib/i18n'
 
@@ -24,8 +25,10 @@ export default async function ProjectsPage({
   const dict = await getDictionary(lang)
 
   return (
-    <div className="section-spacing">
-      <div className="container-main">
+    <div className="section-spacing relative overflow-hidden">
+      <CodeBackdrop preset="header" height="20rem" />
+      <CodeBackdrop preset="edges" seed={5} count={12} />
+      <div className="container-main relative">
         <h1 className="mb-4">{dict.projectsPage.title}</h1>
         <p className="text-muted max-w-xl mb-10">{dict.projectsPage.intro}</p>
 

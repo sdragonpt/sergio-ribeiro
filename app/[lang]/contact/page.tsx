@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import CodeBackdrop from '@/components/CodeBackdrop'
 import { Mail, MapPin } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import ContactForm from '@/components/ContactForm'
@@ -27,8 +28,9 @@ export default async function ContactPage({
   const t = dict.contact
 
   return (
-    <div className="section-spacing">
-      <div className="container-main">
+    <div className="section-spacing relative overflow-hidden">
+      <CodeBackdrop preset="edges" seed={7} count={8} />
+      <div className="container-main relative">
         <h1 className="mb-4">{t.title}</h1>
         <p className="text-muted max-w-xl mb-12">{t.intro}</p>
 

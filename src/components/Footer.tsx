@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Mail } from 'lucide-react'
+import CodeBackdrop from '@/components/CodeBackdrop'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import {
   PROFILE,
@@ -26,8 +27,9 @@ export default function Footer({
   ]
 
   return (
-    <footer className="border-t border-line bg-bg">
-      <div className="container-main py-12 md:py-16">
+    <footer className="relative overflow-hidden border-t border-line bg-bg">
+      <CodeBackdrop preset="line" seed={4} />
+      <div className="container-main relative py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="font-mono font-bold text-lg mb-2">{PROFILE.name}</h3>

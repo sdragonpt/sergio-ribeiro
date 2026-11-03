@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import CodeBackdrop from '@/components/CodeBackdrop'
 import Timeline from '@/components/Timeline'
 import { getDictionary, isLocale } from '@/lib/i18n'
 
@@ -24,8 +25,10 @@ export default async function ExperiencePage({
   const dict = await getDictionary(lang)
 
   return (
-    <div className="section-spacing">
-      <div className="container-main">
+    <div className="section-spacing relative overflow-hidden">
+      <CodeBackdrop preset="header" height="20rem" />
+      <CodeBackdrop preset="edges" seed={6} count={10} />
+      <div className="container-main relative">
         <h1 className="mb-4">{dict.experience.title}</h1>
         <p className="text-muted max-w-xl mb-12">{dict.experience.intro}</p>
 

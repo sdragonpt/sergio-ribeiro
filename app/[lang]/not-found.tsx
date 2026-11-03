@@ -14,7 +14,7 @@ export default async function NotFound() {
   return (
     <section className="section-spacing relative overflow-hidden">
       <title>{`${t.title} · ${PROFILE.name}`}</title>
-      <CodeBackdrop />
+      <CodeBackdrop preset="hero" />
       <div className="container-main relative">
         <div className="mb-4">
           <span className="text-sm font-mono text-primary-500 uppercase tracking-widest">

@@ -3,6 +3,7 @@ import path from 'node:path'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import CodeBackdrop from '@/components/CodeBackdrop'
 import SkillsGrid from '@/components/SkillsGrid'
 import { getDictionary, isLocale } from '@/lib/i18n'
 
@@ -32,8 +33,9 @@ export default async function AboutPage({
   const showPortrait = hasPortrait || process.env.NODE_ENV !== 'production'
 
   return (
-    <div className="section-spacing">
-      <div className="container-main">
+    <div className="section-spacing relative overflow-hidden">
+      <CodeBackdrop preset="edges" seed={4} count={14} />
+      <div className="container-main relative">
         <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_17rem] md:gap-16 md:items-start mb-16">
           <div>
             <h1 className="mb-8">{dict.about.title}</h1>

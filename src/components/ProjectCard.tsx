@@ -2,6 +2,9 @@ import { ArrowUpRight } from 'lucide-react'
 import { GithubIcon } from '@/components/icons'
 import type { Dictionary, Project } from '@/lib/i18n'
 
+// Faint code watermark in each card's corner, picked from the project id.
+const CARD_MARKS = ['</>', '{ }', '=>', '[ ]', '()', '//', '&&']
+
 export default function ProjectCard({
   project,
   labels,
@@ -9,15 +12,19 @@ export default function ProjectCard({
   project: Project
   labels: Dictionary['projectCard']
 }) {
-  const { title, description, period, status, tags, links } = project
+  const { id, title, description, period, status, tags, links } = project
   const href = links?.live
+  const mark = CARD_MARKS[[...id].reduce((n, c) => n + c.charCodeAt(0), 0) % CARD_MARKS.length]
 
   return (
     <article
-      className={`group relative flex flex-col h-full rounded-lg border border-line bg-surface p-6 transition-colors ${
+      className={`group relative isolate flex flex-col h-full overflow-hidden rounded-lg border border-line bg-surface p-6 transition-colors ${
         href ? 'hover:border-primary-500' : ''
       }`}
     >
+      <span className="card-mark" data-text={mark} aria-hidden="true">
+        {mark}
+      </span>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-3">
         <span
           className={`text-xs font-mono whitespace-nowrap px-2 py-0.5 rounded-full border ${
