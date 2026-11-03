@@ -188,6 +188,28 @@ const en: Dictionary = {
       links: { live: 'https://nonatoservice.pt/' },
     },
     {
+      id: 'icacg26',
+      title: 'ICACG26 · International congress',
+      description:
+        'Website for the 26th International Colloquium on Animal Cytogenetics and Genomics (UTAD), with registration, abstract submission, a participant area and a management backoffice.',
+      period: 'February 2026 – June 2026',
+      status: 'completed',
+      categories: ['Web Dev'],
+      tags: ['PHP', 'MySQL', 'JavaScript', 'Backoffice'],
+      featured: true,
+      links: { live: 'https://icacg26.utad.pt/' },
+    },
+    {
+      id: 'crithinknet',
+      title: 'CritThink Net',
+      description:
+        "Platform for the CritThink Net network (UTAD) to share events, publications and resources, with a backoffice for non-programmers. Accessible (WCAG 2.1 AA) and GDPR-ready.",
+      period: 'August 2026 – Present',
+      status: 'ongoing',
+      categories: ['Web Dev'],
+      tags: ['Vue.js', 'PHP', 'MySQL', 'Accessibility'],
+    },
+    {
       id: 'crewards-v2',
       title: 'Crewards v2',
       description:
@@ -207,7 +229,6 @@ const en: Dictionary = {
       status: 'ongoing',
       categories: ['Web Dev'],
       tags: ['PHP', 'Bootstrap', 'MySQL', 'phpMyAdmin'],
-      featured: true,
     },
     {
       id: 'civica-database',
