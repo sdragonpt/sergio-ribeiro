@@ -1,26 +1,301 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Dark mode: an explicit `.dark` on <html> (set server-side from a cookie),
+   or the OS preference when the user hasn't explicitly chosen `.light`. */
+@custom-variant dark {
+  &:where(.dark, .dark *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not(.light) *, :root:not(.light)) {
+      @slot;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme {
+  /* Accent — the only colour with hue. Everything else is neutral grey. */
+  --color-primary-50: #eff5ff;
+  --color-primary-400: #4f83f1;
+  --color-primary-500: #2f6fed;
+  --color-primary-600: #1f57cc;
+  --color-primary-700: #1b46a3;
+
+  /* Semantic surfaces / text — light values here, dark overrides below.
+     Kept deliberately neutral (no blue tint) so surfaces sit well together. */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f4;
+  --color-elevated: #ececec;
+  --color-line: #e2e2e2;
+  --color-fg: #1a1a1a;
+  --color-muted: #5b5b5b;
+
+  --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  /* Dark palette — applied for an explicit .dark, or the OS preference
+     unless the user has explicitly chosen light (.light). */
+  :root.dark {
+    --color-bg: #0f0f0f;
+    --color-surface: #181818;
+    --color-elevated: #222222;
+    --color-line: #2c2c2c;
+    --color-fg: #ededed;
+    --color-muted: #9a9a9a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+      --color-bg: #0f0f0f;
+      --color-surface: #181818;
+      --color-elevated: #222222;
+      --color-line: #2c2c2c;
+      --color-fg: #ededed;
+      --color-muted: #9a9a9a;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    /* Don't switch to the text I-beam over plain copy — only interactive
+       elements get a meaningful cursor. */
+    cursor: default;
+  }
+
+  a,
+  button,
+  summary,
+  label,
+  [role='button'] {
+    cursor: pointer;
+  }
+
+  input,
+  textarea,
+  select {
+    cursor: auto;
+  }
+
+  h1 {
+    @apply font-mono font-bold text-5xl md:text-6xl leading-tight;
+  }
+  h2 {
+    @apply font-mono font-bold text-3xl md:text-4xl leading-tight;
+  }
+  h3 {
+    @apply font-mono font-bold text-2xl leading-tight;
+  }
+  h4 {
+    @apply font-mono font-bold text-xl leading-tight;
+  }
+  p {
+    @apply text-base leading-relaxed;
+  }
+  code {
+    @apply font-mono text-sm px-2 py-1 rounded;
+    background-color: var(--color-elevated);
+  }
+
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-500 rounded;
+  }
+}
+
+/* Per-navigation page transition (see app/[lang]/template.tsx).
+   Uses @starting-style so the *resting* state is always visible — if the
+   entry transition is skipped (old browser, reduced motion, throttled tab)
+   the content simply appears with no animation. */
+.page-transition {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-transition {
+    transition:
+      opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @starting-style {
+    .page-transition {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+}
+
+/* Component utilities */
+@utility container-main {
+  @apply max-w-4xl mx-auto px-6 md:px-8;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded font-medium bg-primary-500 text-white;
+  @apply hover:bg-primary-600 transition-colors;
+}
+
+@utility btn-outline {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded font-medium border border-line text-fg;
+  @apply hover:border-primary-500 hover:text-primary-500 transition-colors;
+}
+
+@utility section-spacing {
+  @apply py-16 md:py-24;
+}
+
+@utility section-title {
+  @apply font-mono font-bold text-3xl md:text-4xl mb-4;
+}
+
+/* Section headings read like a markdown/anchor reference: "# Title" */
+.section-title::before {
+  content: '# ';
+  color: var(--color-primary-500);
+  font-weight: 400;
+}
+
+/* ---- Typewriter (hero name) ---------------------------------------- */
+.tw-caret {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1em;
+  margin-left: 0.08em;
+  translate: 0 0.12em;
+  background: var(--color-primary-500);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tw-caret {
+    animation: caret-blink 1s steps(1) infinite;
+  }
+  /* the accent "." that pops in once the name finishes typing */
+  .type-tail {
+    display: inline-block;
+    animation: tail-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes tail-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4) translateY(0.1em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Language toggle -------------------------------------------------
+   Hover gives the code a small tilt; clicking fires a full-screen wipe
+   (rendered by LangSwitcher) while the new locale loads underneath. */
+.lang-toggle .lang-code {
+  display: inline-block;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lang-toggle .lang-code {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lang-toggle:hover .lang-code {
+    transform: translateY(-2px) rotateX(-22deg);
+  }
+}
+
+.lang-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-500);
+  transform: translateX(-100%);
+  animation: lang-wipe 0.78s cubic-bezier(0.7, 0, 0.25, 1) forwards;
+}
+.lang-wipe-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(3rem, 12vw, 8rem);
+  letter-spacing: 0.1em;
+  color: #fff;
+  opacity: 0;
+  animation: lang-wipe-label 0.78s ease forwards;
+}
+
+@keyframes lang-wipe {
+  0% {
+    transform: translateX(-100%);
+  }
+  42%,
+  52% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes lang-wipe-label {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  42%,
+  52% {
+    opacity: 1;
+  }
+  80%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---- Nav links: underline wipes in from the left ------------------- */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link:hover::after,
+.nav-link[aria-current='page']::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after {
+    transition: none;
+  }
 }
