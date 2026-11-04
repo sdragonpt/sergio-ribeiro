@@ -58,6 +58,9 @@
 
   html {
     scroll-behavior: smooth;
+    /* Room for the sticky nav: when a link opens a new page, the router scrolls
+       the content into view, and without this it would sit under the nav. */
+    scroll-padding-top: 6rem;
   }
 
   body {

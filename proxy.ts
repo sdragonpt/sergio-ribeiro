@@ -5,6 +5,10 @@ const LOCALES = ['pt', 'en'] as const
 const DEFAULT_LOCALE = 'pt'
 
 function pickLocale(request: NextRequest): string {
+  // An explicit choice from the language switcher wins over the browser language.
+  const chosen = request.cookies.get('lang')?.value
+  if (chosen && (LOCALES as readonly string[]).includes(chosen)) return chosen
+
   const header = request.headers.get('accept-language')
   if (header) {
     const wanted = header

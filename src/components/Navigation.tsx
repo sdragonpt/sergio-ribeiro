@@ -72,6 +72,8 @@ function LangSwitcher({ lang }: { lang: Locale }) {
   const href = `/${target}${rest}`
 
   const handleClick = (e: React.MouseEvent) => {
+    // Remember the choice so "/" opens in this language next time (read by proxy.ts).
+    document.cookie = `lang=${target}; path=/; max-age=31536000; samesite=lax`
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
     e.preventDefault()
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -170,6 +172,14 @@ export default function Navigation({
       <div className="container-main py-5 flex justify-between items-center">
         <Link
           href={localePath(lang, 'home')}
+          onClick={e => {
+            // Already on home: the link would do nothing, so scroll back up instead.
+            if (pathname !== localePath(lang, 'home') || e.metaKey || e.ctrlKey || e.shiftKey) return
+            e.preventDefault()
+            setIsOpen(false)
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+          }}
           className="font-mono font-bold text-lg hover:text-primary-500 transition-colors"
         >
           {PROFILE.firstName}
