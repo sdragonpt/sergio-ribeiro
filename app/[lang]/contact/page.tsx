@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import CodeBackdrop from '@/components/CodeBackdrop'
-import { Mail, MapPin } from 'lucide-react'
+import { FileText, Mail, MapPin } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import ContactForm from '@/components/ContactForm'
 import { PROFILE, SOCIAL_LINKS, getDictionary, isLocale } from '@/lib/i18n'
@@ -75,6 +75,16 @@ export default async function ContactPage({
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon size={20} />
+              </a>
+              <a
+                href={SOCIAL_LINKS.cv}
+                target="_blank"
+                rel="noopener"
+                className="p-2 rounded-lg text-muted hover:text-primary-500 hover:bg-elevated transition-colors"
+                aria-label={dict.nav.cv}
+                title={dict.nav.cv}
+              >
+                <FileText size={20} />
               </a>
             </div>
           </div>

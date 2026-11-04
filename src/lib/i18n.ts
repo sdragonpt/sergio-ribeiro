@@ -50,6 +50,7 @@ export interface Dictionary {
     experience: string
     contact: string
     home: string
+    cv: string
     themeToggle: string
     openMenu: string
     closeMenu: string
@@ -146,6 +147,8 @@ export const SOCIAL_LINKS = {
   github: 'https://github.com/sdragonpt',
   linkedin: 'https://www.linkedin.com/in/sergionfr/',
   email: PROFILE.email,
+  /** One-page CV (PT), served from public/cv. */
+  cv: '/cv/Sergio_Ribeiro_CV.pdf',
 }
 
 /** Route slugs are shared across locales: /pt/about, /en/about … */

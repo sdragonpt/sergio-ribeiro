@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Mail } from 'lucide-react'
+import { FileText, Mail } from 'lucide-react'
 import CodeBackdrop from '@/components/CodeBackdrop'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import {
@@ -85,6 +85,16 @@ export default function Footer({
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon size={20} />
+              </a>
+              <a
+                href={SOCIAL_LINKS.cv}
+                target="_blank"
+                rel="noopener"
+                className="p-2 rounded-lg text-muted hover:text-primary-500 hover:bg-elevated transition-colors"
+                aria-label={dict.nav.cv}
+                title={dict.nav.cv}
+              >
+                <FileText size={20} />
               </a>
             </div>
           </div>

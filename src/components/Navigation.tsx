@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Moon, Sun, Menu, X, ArrowRight, ArrowUpRight, Mail } from 'lucide-react'
+import { Moon, Sun, Menu, X, ArrowRight, ArrowUpRight, FileText, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import {
   PROFILE,
@@ -306,6 +306,15 @@ export default function Navigation({
                 className="flex items-center gap-2 text-muted hover:text-primary-500 transition-colors"
               >
                 <LinkedinIcon size={16} /> LinkedIn <ArrowUpRight size={14} />
+              </a>
+              <a
+                href={SOCIAL_LINKS.cv}
+                target="_blank"
+                rel="noopener"
+                title={nav.cv}
+                className="flex items-center gap-2 text-muted hover:text-primary-500 transition-colors"
+              >
+                <FileText size={16} /> CV <ArrowUpRight size={14} />
               </a>
             </div>
           </div>

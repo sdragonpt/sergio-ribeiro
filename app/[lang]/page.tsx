@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowRight, Mail } from 'lucide-react'
+import { ArrowRight, FileText, Mail } from 'lucide-react'
 import CodeBackdrop from '@/components/CodeBackdrop'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
@@ -77,6 +77,16 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             >
               <Mail size={16} />
               Email
+            </a>
+            <a
+              href={SOCIAL_LINKS.cv}
+              target="_blank"
+              rel="noopener"
+              title={dict.nav.cv}
+              className="flex items-center gap-2 text-sm text-muted hover:text-primary-500 transition-colors"
+            >
+              <FileText size={16} />
+              CV
             </a>
           </div>
         </div>

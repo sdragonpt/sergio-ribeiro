@@ -19,6 +19,7 @@ const pt: Dictionary = {
     experience: 'Experiência',
     contact: 'Contacto',
     home: 'Início',
+    cv: 'Currículo (PDF)',
     themeToggle: 'Alternar tema claro/escuro',
     openMenu: 'Abrir menu',
     closeMenu: 'Fechar menu',
@@ -164,6 +165,18 @@ const pt: Dictionary = {
 
   projects: [
     {
+      id: 'pappy-burger',
+      title: 'Pappy Burger',
+      description:
+        'Site de uma hamburgueria em Itália, em italiano e inglês, com encomendas online para levantamento, alergénios e um painel de cozinha com alertas e horários editáveis.',
+      period: 'Novembro 2026',
+      status: 'completed',
+      categories: ['Web Dev'],
+      tags: ['React', 'TanStack Start', 'Supabase', 'Netlify'],
+      featured: true,
+      links: { live: 'https://pappy-burger.netlify.app/' },
+    },
+    {
       id: 'nonato-service',
       title: 'Nonato Service',
       description:
@@ -184,7 +197,6 @@ const pt: Dictionary = {
       status: 'completed',
       categories: ['Web Dev'],
       tags: ['Astro', 'Tailwind CSS', 'Firebase Hosting'],
-      featured: true,
       links: { live: 'https://nonatoservice.pt/' },
     },
     {
@@ -208,6 +220,7 @@ const pt: Dictionary = {
       status: 'ongoing',
       categories: ['Web Dev'],
       tags: ['Vue.js', 'PHP', 'MySQL', 'Acessibilidade'],
+      links: { live: 'https://crithinknet.netlify.app/' },
     },
     {
       id: 'crewards-v2',
