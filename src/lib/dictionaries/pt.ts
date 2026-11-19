@@ -55,8 +55,7 @@ const pt: Dictionary = {
   about: {
     title: 'Sobre mim',
     paragraphs: [
-      'Sou o Sérgio, licenciado em Comunicação e Multimédia e, atualmente, mestrando em Tecnologias Multimédia na UTAD. Gosto de estar sempre a experimentar ferramentas novas e a levar as minhas ideias do conceito ao produto.',
-      'A base em comunicação e multimédia ajuda-me a pensar primeiro na pessoa que vai usar o que construo — e só depois no código. Interessa-me criar experiências digitais rápidas, claras e com bom aspeto.',
+      'Autodidata e apaixonado por tecnologia, foco-me no desenvolvimento web, conciliando design de interfaces e programação, do front-end ao back-end. A minha formação em comunicação e multimédia permite-me aliar uma visão criativa a uma abordagem técnica, colocando a experiência do utilizador no centro de cada projeto. Procuro desenvolver soluções digitais funcionais, intuitivas e visualmente cuidadas.',
     ],
     photoAlt: 'Retrato de Sérgio Ribeiro',
     photoCaption: '// Vila Real, Portugal',

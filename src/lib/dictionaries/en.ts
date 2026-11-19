@@ -55,8 +55,7 @@ const en: Dictionary = {
   about: {
     title: 'About me',
     paragraphs: [
-      "I'm Sérgio, with a bachelor's in Communication and Multimedia and currently a master's student in Multimedia Technologies at UTAD. I like to keep experimenting with new tools and taking ideas from concept to product.",
-      'My background in communication and multimedia means I think about the person using what I build first, and the code second. I care about digital experiences that are fast, clear and good-looking.',
+      'Self-taught and passionate about technology, I focus on web development, bringing together interface design and programming, from front-end to back-end. My background in communication and multimedia lets me combine a creative vision with a technical approach, putting the user experience at the centre of every project. I aim to build digital solutions that are functional, intuitive and visually polished.',
     ],
     photoAlt: 'Portrait of Sérgio Ribeiro',
     photoCaption: '// Vila Real, Portugal',
