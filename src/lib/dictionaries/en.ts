@@ -116,7 +116,7 @@ const en: Dictionary = {
         company: 'UTAD',
         role: 'Technical Officer',
         kind: 'Full-time',
-        period: 'February 2025 – Present',
+        period: 'February 2025 – December 2026',
         description:
           'Member of the Pedagogical Innovation Unit, under the UTAD+Sucesso project. I work mostly across design, photography/video and web development, supporting academic-success initiatives.',
         tags: ['Design', 'Photography', 'Video', 'Web Development'],

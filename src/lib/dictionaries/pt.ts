@@ -116,7 +116,7 @@ const pt: Dictionary = {
         company: 'UTAD',
         role: 'Técnico Superior',
         kind: 'Tempo inteiro',
-        period: 'Fevereiro 2025 – Presente',
+        period: 'Fevereiro 2025 – Dezembro 2026',
         description:
           'Membro do Núcleo de Inovação Pedagógica, ao abrigo do Projeto UTAD+Sucesso. Trabalho sobretudo nas áreas de design, fotografia/vídeo e desenvolvimento web, apoiando iniciativas de apoio ao sucesso académico.',
         tags: ['Design', 'Fotografia', 'Vídeo', 'Desenvolvimento Web'],
